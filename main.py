@@ -12,6 +12,8 @@ import numpy as np
 
 # =========================BACKEND=========================
 fname = "data.txt"
+
+# extract data
 myfile = open("data2.txt", "rt") 
 dta = []
 for l in myfile:
@@ -19,39 +21,24 @@ for l in myfile:
 myfile.close()         
 
 def main():
-    # boo = False
-    # while not boo:
+    # pick random line
+    n = random.randint(0, len(dta)-1)
 
-        # pick random idea
-    #     n = random.randint(1, 7698)
-
-    #     # extract data
-    #     dta = open(fname, 'r', encoding="utf8")
-    #     l = dta.readline()
-    #     if l[0] != str(n):
-    #         for l in dta.readlines():
-    #             if l[0] == str(n):
-    #                 boo = True
-    #                 break
-    #     dta.close()
-
-    # # update window
-    # l = l.split(",")
-    # name.set(l[1])
-    # geo.set(l[2]+" "+l[3])
-    # coord.set(l[6]+" "+l[7])
-    # code.set(l[5])  
-
-        n = random.randint(0, len(dta)-1)
+    # update display
+    name.set(dta[n][2].lower())
+    geo.set(dta[n][3].lower()+" "+dta[n][4].lower())
+    coord.set(dta[n][-2]+" "+dta[n][-1])
+    code.set(dta[n][0])
 
     root.update()
 
     # map
-    img = Image.open("map.png")
-    img = np.array(img)
-    plt.imshow(img)
-    # plt.plot(float(l[7])*(62/36)+410, -float(l[6])*(30/18)+195, "*")
-    plt.show()
+    if [dta[n][-1], dta[n][-2]] != ["0.000", "0.000"]:
+        img = Image.open("map.png")
+        img = np.array(img)
+        plt.imshow(img)
+        plt.plot(float(dta[n][-1])*(62/36)+410, -float(dta[n][-2])*(30/18)+195, "*", color="#0000FF")
+        plt.show()
 
 # =========================FRONTEND=========================
 root = Tk()
