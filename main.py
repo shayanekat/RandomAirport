@@ -3,43 +3,54 @@ Programme principale du projet RandomAirport
 """
 from tkinter import *
 import random
+import matplotlib.pyplot as plt
+from PIL import Image
+import numpy as np
 
 # TODO (30/07/2020): 
 #   show in a world map
 
 # =========================BACKEND=========================
 fname = "data.txt"
+myfile = open("data2.txt", "rt") 
+dta = []
+for l in myfile:
+    dta.append(l[:-1].split(":"))        
+myfile.close()         
 
 def main():
-    boo = False
-    while not boo:
+    # boo = False
+    # while not boo:
 
         # pick random idea
-        n = random.randint(1, 7698)
+    #     n = random.randint(1, 7698)
 
-        # extract data
-        dta = open(fname, 'r', encoding="utf8")
-        l = dta.readline()
-        if l[0] != str(n):
-            for l in dta.readlines():
-                if l[0] == str(n):
-                    boo = True
-                    break
-        dta.close()
+    #     # extract data
+    #     dta = open(fname, 'r', encoding="utf8")
+    #     l = dta.readline()
+    #     if l[0] != str(n):
+    #         for l in dta.readlines():
+    #             if l[0] == str(n):
+    #                 boo = True
+    #                 break
+    #     dta.close()
 
-    # update window
-    l = l.split(",")
-    name.set(l[1])
-    geo.set(l[2]+" "+l[3])
-    coord.set(l[6]+" "+l[7])
-    code.set(l[5])
-        
+    # # update window
+    # l = l.split(",")
+    # name.set(l[1])
+    # geo.set(l[2]+" "+l[3])
+    # coord.set(l[6]+" "+l[7])
+    # code.set(l[5])  
+
+        n = random.randint(0, len(dta)-1)
+
     root.update()
 
     # map
-    m = Basemap(projection='mill')
-    m.drawcoastlines()
-    plt.plot(int(l[6]), int(l[7]))
+    img = Image.open("map.png")
+    img = np.array(img)
+    plt.imshow(img)
+    # plt.plot(float(l[7])*(62/36)+410, -float(l[6])*(30/18)+195, "*")
     plt.show()
 
 # =========================FRONTEND=========================
