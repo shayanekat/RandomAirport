@@ -11,10 +11,8 @@ import numpy as np
 #   show in a world map
 
 # =========================BACKEND=========================
-fname = "data.txt"
-
 # extract data
-myfile = open("data2.txt", "rt") 
+myfile = open("data.txt", "rt") 
 dta = []
 for l in myfile:
     dta.append(l[:-1].split(":"))        
